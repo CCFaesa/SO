@@ -4,8 +4,8 @@ import java.util.List;
 
 class FilosofoGlutao implements Runnable{
 	
-	final int N = 5; // s„o cinco filosofos e cinco garfos...
-	List <Garfo> garfos; // garfos disponÌveis 0, 1, 2, 3 e 4
+	final int N = 5; // s√£o cinco filosofos e cinco garfos...
+	List <Garfo> garfos; // garfos dispon√≠veis 0, 1, 2, 3 e 4
 	int filosofo;
 	FilosofoGlutao (List <Garfo>gs, int fil){
 		garfos = gs;
@@ -22,20 +22,20 @@ class FilosofoGlutao implements Runnable{
 			int primeiroGarfoAPegar = filosofo % 2 == 0 ? filosofo : indexGarfoDireita;
 			int segundoGarfoAPegar = filosofo % 2 == 0 ?  indexGarfoDireita : filosofo;
 			
+			// pensa ...
+			pensaMuito(filosofo);
 			synchronized (garfos.get(primeiroGarfoAPegar)) {
 				synchronized (garfos.get(segundoGarfoAPegar)) {
-					// pensa ...
-					pensaMuito(filosofo);
 					// pega garfo da esquerda
-					pegaGarfo(/*posiÁao*/filosofo, /*dono*/filosofo);
+					pegaGarfo(/*posi√ßao*/filosofo, /*dono*/filosofo);
 					// pega garfo da direita
-					pegaGarfo(/*posiÁao*/(filosofo+1)%N, /*dono*/filosofo);
+					pegaGarfo(/*posi√ßao*/(filosofo+1)%N, /*dono*/filosofo);
 					// fatura o espaguete
 					comeEspaguete(filosofo);
 					// larga o garfo da esquerda
-					largaGarfo(/*posiÁao*/filosofo, /*dono*/filosofo);
+					largaGarfo(/*posi√ßao*/filosofo, /*dono*/filosofo);
 					// larga o garfo da direita
-					largaGarfo(/*posiÁao*/(filosofo+1)%N, /*dono*/filosofo);
+					largaGarfo(/*posi√ßao*/(filosofo+1)%N, /*dono*/filosofo);
 				}
 			}
 		}
@@ -85,9 +85,9 @@ class FilosofoGlutao implements Runnable{
 	
 	private void comeEspaguete(int fil){
 		// se ambos os garfos estiverem reservados pelo
-		// filosofo "fil", ent„o ele come espaguete...
-		// Testar a sua soluÁ„o de proteÁ„o, comente o if, deixando apenas o 
-		// seu conte˙do liberado
+		// filosofo "fil", ent√£o ele come espaguete...
+		// Testar a sua solu√ß√£o de prote√ß√£o, comente o if, deixando apenas o 
+		// seu conte√∫do liberado
 		if (((Garfo)garfos.get(fil)).getEstadoGarfo() &&
 			((Garfo)garfos.get((fil+1)%N)).getEstadoGarfo() &&
 			((Garfo)garfos.get(fil)).getDonoGarfo()==fil &&
